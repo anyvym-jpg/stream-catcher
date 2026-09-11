@@ -62,7 +62,7 @@ process.on('SIGINT', () => {
 let server; 
 
 initDatabase().then(() => {
-  app.listen(PORT, () => {
+  server = app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }).catch(error => {
@@ -82,7 +82,7 @@ async function gracefulShutdown() {
     await pool.end();
     console.log('Database pool closed');
     process.exit(0)
-    
+
   } catch (error) {
     console.error('Error closing database pool:', error); 
     process.exit(1)
